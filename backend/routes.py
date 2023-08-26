@@ -44,7 +44,11 @@ def get_pictures():
 
 @app.route("/picture/<int:id>", methods=["GET"])
 def get_picture_by_id(id):
-    pass
+    for d in data: 
+        if id == int(d['id']):
+            return d
+    
+    return {'message': f'Picture with id {id} not found'}, 404
 
 
 ######################################################################

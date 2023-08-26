@@ -56,7 +56,17 @@ def get_picture_by_id(id):
 ######################################################################
 @app.route("/picture", methods=["POST"])
 def create_picture():
-    pass
+    new_picture = request.get_json()
+
+    if new_picture:
+        for d in data: 
+            if d['id'] == new_picture['id']:
+                return {"Message": f"picture with id {new_picture['id']} already present"}, 302
+
+        data.append(new_picture)
+        return new_picture, 201
+    else:
+        return {'message': 'Invalid input'}, 402
 
 ######################################################################
 # UPDATE A PICTURE
